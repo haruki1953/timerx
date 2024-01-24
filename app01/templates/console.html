@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://static.timerx.top/timerx/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" href="https://static.timerx.top/timerx/assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>TimerX Console</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,600,700" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- Main CSS -->
+    <link href="https://static.timerx.top/timerx/assets/css/main.css" rel="stylesheet" />
+
+    <!-- Animation CSS -->
+    <link href="https://static.timerx.top/timerx/assets/css/vendor/aos.css" rel="stylesheet" />
+
+    <!-- Docs CSS -->
+    <link href="https://static.timerx.top/timerx/assets/css/vendor/bootstrap-toc.css" rel="stylesheet" />
+    <link href="https://static.timerx.top/timerx/assets/css/vendor/prism.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+
+    <!----------------------------------------------------------------------
+End fixed sidebar
+--------------------------------------------------------------------- -->
+
+    <nav id="toc" class="fixedsidebar d-none d-lg-block">
+        <h5 class="mt-4 mb-4 pt-1"><a class="text-dark" href="/console/"><strong>TimerX</strong> Console</a></h5>
+        <a target="_blank" href="/connect/" class="btn btn-primary mb-4 btn-sm btn-round"><i
+                class="fas fa-comment mr-1"></i>
+            有问题？联系客服</a>
+    </nav>
+
+    <!----------------------------------------------------------------------
+End fixed sidebar
+--------------------------------------------------------------------- -->
+
+
+    <main class="content-withfixedsidebar">
+
+
+        <!----------------------------------------------------------------------
+        NAVBAR (remove topnav if you don't want changed nav background on scroll)
+        --------------------------------------------------------------------- -->
+        <nav class="topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index/"><strong>TimerX</strong></a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto d-flex align-items-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/docs/">建站指南</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                示例模板</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/demo-a/">A模板</a>
+                                <a class="dropdown-item" href="/demo-b/">B模板</a>
+                                <a class="dropdown-item" href="/demo-c/">C模板</a>
+                                <a class="dropdown-item" href="/demo-d/">D模板</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/connect/">联系我们</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto d-flex align-items-center">
+                        <li id="user" class="nav-item dropdown">
+                            <a class="btn btn-info btn-round shadow-sm nav-link dropdown-toggle text-dark pl-3 pr-3" href="#"
+                                id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                                {{userSession.username}}</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/logout/">登出</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <!-------------------------------------
+        HEADER
+        ------------------------------------ -->
+        <div class="jumbotron jumbotron-lg jumbotron-fluid jumbotron-lg-withnav mb-3 bg-primary position-relative">
+            <div class="container text-white h-100 tofront">
+                <div class="row align-items-center justify-content-center text-center">
+                    <div class="col-md-10">
+                        <h1 class="display-3"><b>{{userInfo.username}}</b></h1>
+                        <h3 class="font-weight-light mb-4">
+                            欢迎您
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- END HEADER -->
+
+        <!-- MAIN -->
+        <div class="container" id="docsarea">
+            
+            {% if userInfo.state == '停止运行' %}
+            <section class="pt-4 pb-5" data-aos="fade">
+                <div class="jumbotron p-5 jumbotron-fluid bg-primary">
+                    <div class="container h-100">
+                        <div class="row justify-content-between align-items-center text-md-center text-lg-left">
+                            <div class="col-lg-9">
+                                <h3 class="font-weight-light text-white">
+                                    <strong>您的网站已停止运行</strong>，联系客服恢复您的网站</h3>
+                            </div>
+                            <div class="col-lg-3 text-md-center text-lg-right mt-4 mb-4">
+                                <a href="/connect/" class="btn btn-lg btn-info">联系客服</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% else %}
+            <!--------------------------------------
+            INFO
+            ------------------------------------ -->
+            <section class="pt-4 pb-5" data-aos="fade-up">
+                <div class="card-deck card-pricing text-center">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-info border-0 pt-4 pb-4">
+                            
+                            <h3 class="my-0 font-weight-normal mb-3">您的网站已运行</h3>
+                            <h4 class="card-title pricing-card-title">{{userInfo.accumulated_days}}<small class="text-muted"> 天</small></h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <div>域名</div>
+                                    <div>{{userInfo.domain_name}}</div>
+                                </li>
+                                <li>
+                                    <div>建立日期</div>
+                                    <div>{{userInfo.create_time|date:"Y-m-d"}}</div>
+                                </li>
+                                <li>
+                                    <div>用户级别</div>
+                                    <div class="text-info">{{userInfo.level}}</div>
+                                </li>
+                                <li>
+                                    <div>电话号码</div>
+                                    <div>{{userInfo.phonenum}}</div>
+                                </li>
+                                <li>
+                                    <div>您的余额</div>
+                                    <div>
+                                        <span class="text-danger">{{userInfo.account}}</span>
+                                        <span class="text-muted">元</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-primary border-0 pt-4 pb-4">
+                            {% if userInfo.state == '已欠费' %}
+                            <h3 class="my-0 font-weight-normal text-white mb-3">已欠费
+                                <span class="text-warning">{{userInfo.due_days}}</span>
+                                <small class="text-muted"> 天</small>
+                            </h3>
+                            <h4 class="card-title pricing-card-title text-white">
+                                欠费超20天网站将停止运行
+                            </h4>
+                            {% else %}
+                            <h3 class="my-0 font-weight-normal text-white mb-3">距离下次月付</h3>
+                            <h4 class="card-title pricing-card-title text-white">{{userInfo.time_until_next_monthly_payment}}<small class="text-muted"> 天</small>
+                            </h4>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <div>上次月付日期</div>
+                                    <div>{{userInfo.last_monthly_payment_date|date:"Y-m-d"}}</div>
+                                </li>
+                                <li>
+                                    <div>下次月付日期</div>
+                                    <div>{{userInfo.next_monthly_payment_date|date:"Y-m-d"}}</div>
+                                </li>
+                                <li>
+                                    <div>月付金额</div>
+                                    <div>
+                                        <span class="text-danger">{{userInfo.monthly_payment_amount}}</span>
+                                        <span class="text-muted">元</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>域名到期日期</div>
+                                    <div>{{userInfo.domain_name_expiration_date|date:"Y-m-d"}}</div>
+                                </li>
+
+                                <li>
+                                    <div>域名续费金额</div>
+                                    <div>
+                                        <span class="text-danger">{{userInfo.domain_name_renewal_amount}}</span>
+                                        <span class="text-muted">元</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-info border-0 pt-4 pb-4">
+                            <h3 class="my-0 font-weight-normal mb-3">您的余额</h3>
+                            <h4 class="card-title pricing-card-title">0<small class="text-muted"> 元</small></h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <div>域名</div>
+                                    <div>TimerX.top</div>
+                                </li>
+                                <li>
+                                    <div>建立日期</div>
+                                    <div>2023-09-24</div>
+                                </li>
+                                <li>
+                                    <div>您的余额</div>
+                                    <div>
+                                        <span class="text-danger">0</span>
+                                        <span class="text-muted">元</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Button trigger modal type 1-->
+                        <a href="//{{userInfo.domain_name}}" type="button" class="btn btn-primary w-100 text-white">
+                            进入您的网站 </a>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Button trigger modal type 2-->
+                        <a href="/connect/" class="btn btn-info w-100">
+                            联系客服充值 </a>
+                    </div>
+
+                </div>
+            </section>
+            {% endif %}
+            <!--------------------------------------
+            TABLE
+            ------------------------------------ -->
+            <section class="pt-4 pb-5" data-aos="fade-up">
+                <h3 class="h5 mb-4 font-weight-bold">信息记录</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">
+                                #
+                            </th>
+                            <th scope="col">
+                                内容
+                            </th>
+                            <th scope="col">
+                                时间
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for opnData in userOpn %}
+                        <tr>
+                            <th scope="row">
+                                {{forloop.counter}}
+                            </th>
+                            <td>
+                                {{opnData.operation_content}}
+                            </td>
+                            <td>
+                                {{opnData.datatime|date:"Y-m-d H:i"}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <!-- End MAIN -->
+
+
+
+
+        <!--------------------------------------
+        FOOTER
+        ------------------------------------ -->
+        <footer class="bg-light pb-5 pt-4">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-12">
+                        <span class="d-block mt-3 text-muted">©
+                            <script>document.write(new Date().getFullYear())</script>
+                            TimerX
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </main>
+    <!--- end main -->
+
+
+    <!--------------------------------------
+JAVASCRIPTS
+------------------------------------ -->
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/jquery.min.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/popper.min.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/functions.js" type="text/javascript"></script>
+
+    <!-- Docs -->
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/prism.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/bootstrap-toc.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            new ClipboardJS('.btn');
+            var navSelector = '#toc';
+            var $myNav = $(navSelector);
+            Toc.init({
+                $nav: $('#toc'),
+                $scope: $('#docsarea')
+            });
+            $('body').scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+    <!-- Animation -->
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/aos.js" type="text/javascript"></script>
+    <noscript>
+        <style>
+            *[data-aos] {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        AOS.init({
+            duration: 700
+        });
+    </script>
+
+    <!-- Disable animation on less than 1200px, change value if you like -->
+    <script>
+        AOS.init({
+            disable: function () {
+                var maxWidth = 0;
+                return window.innerWidth < maxWidth;
+            }
+        });
+    </script>
+
+    <!-- Tooltips -->
+    <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }) </script>
+
+    <!-- Popovers -->
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+    </script>
+
+</body>
+
+</html>

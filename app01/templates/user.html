@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://static.timerx.top/timerx/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" href="https://static.timerx.top/timerx/assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>操作用户</title>
+
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,600,700" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- Main CSS -->
+    <link href="https://static.timerx.top/timerx/assets/css/main.css" rel="stylesheet" />
+
+    <!-- Animation CSS -->
+    <link href="https://static.timerx.top/timerx/assets/css/vendor/aos.css" rel="stylesheet" />
+
+    <!-- Docs CSS -->
+    <link href="https://static.timerx.top/timerx/assets/css/vendor/bootstrap-toc.css" rel="stylesheet" />
+    <link href="https://static.timerx.top/timerx/assets/css/vendor/prism.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!----------------------------------------------------------------------
+End fixed sidebar
+--------------------------------------------------------------------- -->
+
+    <nav id="toc" class="fixedsidebar d-none d-lg-block">
+        <h5 class="mt-4 mb-4 pt-1"><a class="text-dark" href="/user/?id={{userData.id}}"><strong>TimerX</strong>
+                User</a></h5>
+        <a href="/user/?id={{userData.id}}" class="btn btn-primary mb-4 btn-sm btn-round">
+            用户名：
+            {{userData.username}}
+            </a>
+    </nav>
+
+    <!----------------------------------------------------------------------
+End fixed sidebar
+--------------------------------------------------------------------- -->
+
+
+    <main class="content-withfixedsidebar">
+        <!----------------------------------------------------------------------
+        NAVBAR (remove topnav if you don't want changed nav background on scroll)
+        --------------------------------------------------------------------- -->
+        <nav class="topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index/"><strong>TimerX</strong></a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto d-flex align-items-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage-user/">用户管理</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage-operation/">操作记录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/manage-update/">更新记录</a>
+                        </li>
+
+                    </ul>
+                    <ul class="navbar-nav ml-auto d-flex align-items-center">
+                        <li class="nav-item m-2">
+                            <a class="btn btn-info btn-round shadow-sm" href="/adduser/">添加用户</a>
+                        </li>
+                        <li id="user" class="nav-item dropdown">
+                            <a class="btn btn-info btn-round shadow-sm nav-link dropdown-toggle text-dark pl-3 pr-3"
+                                href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                                {{userSession.username}}</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/logout/">登出</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <!-------------------------------------
+        HEADER
+        ------------------------------------ -->
+        <div class="jumbotron jumbotron-fluid jumbotron-lg-withnav mb-3 bg-primary position-relative">
+            <div class="container text-white h-100 tofront">
+                <div class="row align-items-center justify-content-center text-center">
+                    <div class="col-md-10">
+                        <h1 class="display-3"><b>操作用户</b></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--- END HEADER -->
+
+        <!-- DOCS CONTENT -->
+        <div class="container pt-5 pb-5 mb-5">
+            <div class="row justify-content-center">
+
+                <div class="col-lg-11">
+                    <div id="docsarea" class="font-weight-normal">
+                        <!-- 提示信息 -->
+                        {% if userAlert.type %}
+                        <div class="alert alert-{{userAlert.type}}" role="alert">
+                            {{userAlert.content}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        <h1 class="p-1" id="userInfo">用户信息</h1>
+                        <div class="row">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">用户id</small>
+                                <div class="h6">{{userData.id}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">用户名</small>
+                                <div class="h6">{{userData.username}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">密码</small>
+                                <div class="h6">{{userData.password}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">电话号码</small>
+                                <div class="h6">{{userData.phonenum}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">用户级别</small>
+                                <div class="h6">{{userData.level}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">域名</small>
+                                <div class="h6">{{userData.domain_name}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">会员积分</small>
+                                <div class="h6">{{userData.member_points}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">账户余额</small>
+                                <div class="h6">{{userData.account}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">建站日期</small>
+                                <div class="h6">{{userData.create_time|date:"Y-m-d"}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">上次月付日期</small>
+                                <div class="h6">{{userData.last_monthly_payment_date|date:"m-d"}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">下次月付日期</small>
+                                <div class="h6">{{userData.next_monthly_payment_date|date:"m-d"}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">月付金额</small>
+                                <div class="h6">{{userData.monthly_payment_amount}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">域名到期日期</small>
+                                <div class="h6">{{userData.domain_name_expiration_date|date:"Y-m-d"}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">域名续费金额</small>
+                                <div class="h6">{{userData.domain_name_renewal_amount}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">状态</small>
+                                <div class="h6">{{userData.state}}</div>
+                            </div>
+                            <!-- 不用修改次数，暂时通过备注来标记 -->
+                            <!-- <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">剩余修改次数</small>
+                                <div class="h6">{{userData.remaining_modifications}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">每月修改次数</small>
+                                <div class="h6">{{userData.monthly_modifications}}</div>
+                            </div> -->
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">欠费日期</small>
+                                <div class="h6">{{userData.due_date}}</div>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-1 mb-1">
+                                <small class="form-text text-muted">欠费天数</small>
+                                <div class="h6">{{userData.due_days}}</div>
+                            </div>
+                            <div class="col-12">
+                                <small class="form-text text-muted">备注</small>
+                                <div class="h6">{{userData.notes}}</div>
+                            </div>
+                        </div>
+
+                        <h1 class="p-1 pt-4 mt-5" id="recharge">充值</h1>
+                        <form action="/user-recharge/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="number" class="form-control input-round" placeholder="充值金额"
+                                    required="required" step="any">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    进行充值
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认充值</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="refund">扣费</h1>
+                        <small class="form-text text-muted">手动扣费，须发送消息进行说明</small>
+                        <form action="/user-refund/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="number" class="form-control input-round" placeholder="扣费金额"
+                                    required="required" step="any">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    进行扣费
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认扣费</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="message">发送消息</h1>
+                        <small class="form-text text-muted">发送后用户即可在信息记录中看到</small>
+                        <form action="/user-message/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-8 m-1">
+                                <input name="value" type="text" class="form-control input-round" placeholder="消息内容"
+                                    required="required">
+                                <small class="form-text text-muted">不要超过250字</small>
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    发送消息
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认发送</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="changeNotes">修改备注</h1>
+                        <form action="/user-changeNotes/" method="post">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="form-group">
+                                <textarea name="value" class="form-control" required="required"
+                                    rows="3">{{userData.notes}}</textarea>
+                                <small class="form-text text-muted">不要超过1000字</small>
+                            </div>
+                            <div id="user" class="col-lg-6 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    修改备注
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="changePhonenum">修改电话号码</h1>
+                        <form action="/user-changePhonenum/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}" required="required">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="text" class="form-control input-round" placeholder="用户名" required="required"
+                                    value="{{userData.phonenum}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    修改电话号码
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="changeUsername">修改用户名</h1>
+                        <form action="/user-changeUsername/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}" required="required">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="text" class="form-control input-round" placeholder="用户名" required="required"
+                                    value="{{userData.username}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    修改用户名
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="changePassword">修改密码</h1>
+                        <form action="/user-changePassword/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}" required="required">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="text" class="form-control input-round" placeholder="密码" required="required"
+                                    value="{{userData.password}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    修改密码
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="monthly_payment_amount_modification">月付金额变动</h1>
+                        <form action="/user-monthly_payment_amount_modification/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="number" class="form-control input-round" placeholder="月付金额"
+                                    required="required" step="any" value="{{userData.monthly_payment_amount}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    变动月付金额
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="domain_name_modification">修改域名</h1>
+                        <form action="/user-domain_name_modification/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="text" class="form-control input-round" placeholder="域名"
+                                    required="required" value="{{userData.domain_name}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    修改域名
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="domain_name_expiration_date_modification">修改域名到期日期</h1>
+                        <form action="/user-domain_name_expiration_date_modification/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="date" class="form-control input-round" placeholder="域名到期日期"
+                                    required="required" value="{{userData.domain_name_expiration_date|date:"Y-m-d"}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    修改域名到期日期
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="domain_name_renewal_amount_modification">域名续费金额变动</h1>
+                        <form action="/user-domain_name_renewal_amount_modification/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div class="col-lg-6 m-1">
+                                <input name="value" type="number" class="form-control input-round" placeholder="域名续费金额"
+                                    required="required" step="any" value="{{userData.domain_name_renewal_amount}}">
+                            </div>
+                            <div id="user" class="col-lg-3 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    变动域名续费金额
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="domain_name_renewal">域名续费</h1>
+                        <small class="form-text text-muted">确认域名续费金额后进行操作</small>
+                        <form action="/user-domain_name_renewal/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div id="user" class="col-lg-6 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    进行域名续费
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认域名续费</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="stop_operation">手动停止运行</h1>
+                        <small class="form-text text-muted">请与客户确认余额后进行</small>
+                        <form action="/user-stop_operation/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div id="user" class="col-lg-6 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    停止运行
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认停止运行</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <h1 class="p-1 pt-4 mt-5" id="resume_operation">从停止运行状态恢复</h1>
+                        <small class="form-text text-muted">状态为停止运行的用户可以在此恢复，将重置余额和月付时间</small>
+                        <form action="/user-resume_operation/" method="post" class="row">
+                            {% csrf_token %}
+                            <input name="id" class="d-none" type="number" value="{{userData.id}}">
+                            <div id="user" class="col-lg-6 m-1 dropdown">
+                                <a class="btn btn-primary btn-round shadow-sm nav-link text-white" id="navbarDropdown"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    恢复运行
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <button type="submit" class="dropdown-item">确认恢复运行</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- 信息记录 -->
+                        <h1 class="p-1 pt-4 mt-5" id="userOpnRec">操作记录</h1>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">
+                                        #
+                                    </th>
+                                    <th scope="col">
+                                        id
+                                    </th>
+                                    <th scope="col">
+                                        类型
+                                    </th>
+                                    <th scope="col">
+                                        内容
+                                    </th>
+                                    <th scope="col">
+                                        时间
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for opnData in userOpn %}
+                                <tr>
+                                    <th scope="row">
+                                        {{forloop.counter}}
+                                    </th>
+                                    <td>
+                                        {{opnData.id}}
+                                    </td>
+                                    <td>
+                                        {{opnData.operation_type}}
+                                    </td>
+                                    <td>
+                                        {{opnData.operation_content}}
+                                    </td>
+                                    <td>
+                                        {{opnData.datatime|date:"Y-m-d H:i"}}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- End docs -->
+                </div>
+            </div>
+        </div>
+        <!-- End DOCS -->
+
+        <!--------------------------------------
+        FOOTER
+        ------------------------------------ -->
+        <footer class="bg-light pb-5 pt-4">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-12">
+                        <span class="d-block mt-3 text-muted">© 2023 TimerX
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </main>
+    <!--- end main -->
+
+
+    <!--------------------------------------
+JAVASCRIPTS
+------------------------------------ -->
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/jquery.min.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/popper.min.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/functions.js" type="text/javascript"></script>
+
+    <!-- Docs -->
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/prism.js" type="text/javascript"></script>
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/bootstrap-toc.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            new ClipboardJS('.btn');
+            var navSelector = '#toc';
+            var $myNav = $(navSelector);
+            Toc.init({
+                $nav: $('#toc'),
+                $scope: $('#docsarea')
+            });
+            $('body').scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+    <!-- Animation -->
+    <script src="https://static.timerx.top/timerx/assets/js/vendor/aos.js" type="text/javascript"></script>
+    <noscript>
+        <style>
+            *[data-aos] {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        AOS.init({
+            duration: 700
+        });
+    </script>
+
+    <!-- Disable animation on less than 1200px, change value if you like -->
+    <script>
+        AOS.init({
+            disable: function () {
+                var maxWidth = 0;
+                return window.innerWidth < maxWidth;
+            }
+        });
+    </script>
+
+    <!-- Tooltips -->
+    <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }) </script>
+
+    <!-- Popovers -->
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+    </script>
+
+</body>
+
+</html>
